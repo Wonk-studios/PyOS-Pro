@@ -1,30 +1,23 @@
 #include <stdint.h>
+#include "display.h"
+#include "bmp.h"
 
-#ifdef __x86_64__
-#define VIDEO_MEMORY_ADDRESS 0xB8000
-#elif defined(__arm__) || defined(__aarch64__)
-#define VIDEO_MEMORY_ADDRESS 0x00000000  // Placeholder address for ARM
-#else
-#error "FATAL VH001! Illegal architecture, cannot boot. HLT."
-#endif
-
-void clear_screen() {
-    uint16_t* video_memory = (uint16_t*)VIDEO_MEMORY_ADDRESS;
-    for (int i = 0; i < 80 * 25; i++) {
-        video_memory[i] = (0x0F << 8) | ' ';
-    }
-}
-
-void print_message(const char* message) {
-    uint16_t* video_memory = (uint16_t*)VIDEO_MEMORY_ADDRESS;
-    for (int i = 0; message[i] != '\0'; i++) {
-        video_memory[i] = (0x0F << 8) | message[i];
-    }
-}
+// Function to read a file from disk (placeholder, replace with actual implementation)
+int read_file(const char* filename, uint8_t* buffer, uint32_t buffer_size);
 
 void kernel_main() {
-    clear_screen();
-    print_message("Kernel Loaded in Secure Long Mode");
+    display_init();
+    display_clear();
+
+    // Buffer to hold the BMP file data
+    uint8_t bmp_buffer[1024 * 1024]; // 1 MB buffer, adjust size as needed
+
+    // Read the BMP file from disk
+    if (read_file("splash_screen.bmp", bmp_buffer, sizeof(bmp_buffer)) == 0) {
+        display_bmp(bmp_buffer);
+    } else {
+        display_puts("Non fatal n1: Failed to load splash screen.\n");
+    }
 
     // Load the interpreter entry
     extern void interpreter_entry();
