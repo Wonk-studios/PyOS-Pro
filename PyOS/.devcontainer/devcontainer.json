@@ -1,0 +1,21 @@
+{
+    "name": "PyOS Pro Development Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.cmake-tools"
+    ],
+    "postCreateCommand": "cmake . && make",
+    "remoteUser": "vscode",
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/workspace"
+}
