@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #define PARTITION_PATH "/dev/special_partition"
-#define PARTITION_SIZE_MB 1000
+#define PARTITION_SIZE_MB 10
 #define RAM_START_ADDRESS 0x00000000 // Adjust based on actual RAM start
 #define RAM_SIZE_MB PARTITION_SIZE_MB
 
