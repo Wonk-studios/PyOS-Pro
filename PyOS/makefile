@@ -1,5 +1,3 @@
-# PyOS Pro main makefile
-
 # Define the compiler and flags
 CC = gcc
 CFLAGS = -std=gnu99 -ffreestanding -O2 -Wall -Wextra
@@ -65,8 +63,6 @@ $(ISO_FILE): $(TARGET)
 	cp ./PyOS/.devcontainer/dockerfile $(ISO_DIR)/boot/
 	cp ./PyOS/interpret/script/main.py $(ISO_DIR)/boot/
 	cp ./PyOS/interpret/modules/modules/PyOS\ module/PyOS.py $(ISO_DIR)/boot/
-	cp ./PyOS/boot/bootmngr.c $(ISO_DIR)/boot/
-	cp ./devtools/index.py $(ISO_DIR)/boot/
 	cp grub.cfg $(ISO_DIR)/boot/grub/
 	grub-mkrescue -o $(ISO_FILE) $(ISO_DIR)
 
