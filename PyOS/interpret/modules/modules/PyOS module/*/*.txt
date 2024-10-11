@@ -1,0 +1,4 @@
+The PyOS Module is meant for the PyOS Operating system, and can only call functions within the PyOS Operating system.
+
+This module cannot call any functions on Windows, or Linux, as these have different hidden names for these functions that this calls on PyOS.
+You can still write your code on VSCode with the PyOS VM.
